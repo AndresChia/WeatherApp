@@ -1,6 +1,6 @@
 import moment from 'moment'
 import 'moment/locale/es'
-import {transformWeatherOnlyData} from './weatherTransform.services'
+import {transformWeather} from './weatherTransform.services'
 
 const transformForecast = (data) => {
     let dataFilter = data.list.filter(element => moment.unix(element.dt).utc().hour() === 6 ||
@@ -10,7 +10,7 @@ const transformForecast = (data) => {
                 {
                     weekDay: moment.unix(element.dt).format('ddd'),
                     hour: moment.unix(element.dt).hour(),
-                    data: transformWeatherOnlyData(element)
+                    data: transformWeather(element)
 
                 }
             )

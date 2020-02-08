@@ -21,25 +21,10 @@ export const getWeatherState = weather_data => {
 
 
 export const transformWeather = ({ wind: { speed }, name, main: { humidity, temp }, weather: [dato] }) => {
-    const data = {
-        city: name,
-        data: {
-            temperature: Math.round(temp - 273.15),
-            weatherState: getWeatherState(dato),
-            humidity: humidity,
-            wind: `${speed} m/s`
-        }
-    }
-    return data;
-}
-
-
-export const transformWeatherOnlyData = ({ wind: { speed }, name, main: { humidity, temp }, weather: [dato] }) => {
-    const data = {
+    return {
         temperature: Math.round(temp - 273.15),
         weatherState: getWeatherState(dato),
         humidity: humidity,
         wind: `${speed} m/s`
-    }
-    return data;
+    };
 }
