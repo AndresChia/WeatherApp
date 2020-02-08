@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 
 
 const WeatherLocation = ({ onWeatherLocationClick, city, data }) => {
-   debugger
    return (
       <div className="weatherLocationCont" onClick={onWeatherLocationClick}>
          <Location city={city} />

@@ -14,7 +14,6 @@ const LocationList = ({ cities, onSelectedLocation }) => {
 
 
     const strToComponents = cities => {
-        debugger
         return cities.map((city) => (
             <WeatherLocation
                 key={city.key}

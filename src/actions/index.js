@@ -19,12 +19,27 @@ export const setWeatherCity = (value) => ({ type: SET_WEATHER_CITY, value });
 
 
 export const setSelectedCity = (value) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(setCity(value));
-        return fetch(getUrlForecastByCity(value)).then(resolve => (resolve.json())).then((response) => {
-            const forecastData = transformForecast(response);
-            dispatch(setForecastData({ city: value, forecastData }));
-        });
+        const state = getState();
+        const date = state.cities[value] && state.cities[value].forecastDataDate;
+        const now = new Date();
+
+        if (!date || (now - date) > 1 * 60 * 1000) {
+            return fetch(getUrlForecastByCity(value)).then(resolve => (resolve.json())).then((response) => {
+                const forecastData = transformForecast(response);
+                dispatch(setForecastData({ city: value, forecastData }));
+            });
+
+        }
+
+        
+        return;
+
+
+
+
+
     };
 }
 
@@ -33,7 +48,7 @@ export const setWeather = (value) => {
         value.forEach(city => {
             dispatch(getWeatherCity(city));
             fetch(getUrlWeatherByCity(city)).then(resolve => (resolve.json())).then((response) => {
-                const weather= transformWeather(response)
+                const weather = transformWeather(response)
                 dispatch(setWeatherCity({ city, weather }));
             });
         })

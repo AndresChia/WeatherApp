@@ -4,7 +4,6 @@ import reducers from "./../reducers";
 
 const initialState = {
     city: 'Buenos Aires,ar',
-    
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
